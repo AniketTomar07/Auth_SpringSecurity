@@ -1,0 +1,46 @@
+package com.example.backend.serviceEmplement;
+
+import org.springframework.stereotype.Service;
+
+import com.example.backend.entity.Projects;
+import com.example.backend.exception.UserNotFoundException;
+import com.example.backend.repository.ProjectRepository;
+
+
+@Service
+public  class ProjectServiceImpl implements ProjectRepository{
+private final ProjectRepository projectRepository;
+
+    public ProjectServiceImplementation(ProjectRepository projectRepository) {
+        this.projectRepository = projectRepository;
+    }
+
+	@Override
+	public Projects addProject(Projects project) {
+		// TODO Auto-generated method stub
+		return projectRepository.save(project);
+	}
+
+	@Override
+	public Projects updateProject(Projects project) {
+		// TODO Auto-generated method stub
+		return projectRepository.save(project);
+	}
+
+	@Override
+	public void deleteProject(Long id) {
+		// TODO Auto-generated method stub
+		 projectRepository.deleteById(id);
+		
+	}
+
+	@Override
+	public Projects findProjectById(Long id) {
+		// TODO Auto-generated method stub
+		return projectRepository.findProjectById(id).orElseThrow(()-> new UserNotFoundException("Project by this id was not found"));
+	}
+
+
+
+
+}

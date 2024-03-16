@@ -1,0 +1,12 @@
+package com.example.backend.service;
+
+
+import com.example.backend.entity.Projects;
+
+public interface EmployeeServices {
+
+    public Projects addEmployee(Projects employee);
+    public Projects updateEmployee(Projects employee);
+    public void deleteEmployee(Long id);
+
+}

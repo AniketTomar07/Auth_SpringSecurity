@@ -1,0 +1,53 @@
+package com.example.backend.controller;
+import com.example.backend.entity.Project;
+import com.example.backend.serviceImplement.ProjectServiceImplementation;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
+
+@RestController
+@RequestMapping("/employee")
+public class Controller {
+    private final ProjectServiceImplementation employeeServiceImplementation;
+
+    public Controller(ProjectServiceImplementation employeeServiceImplementation) {
+        this.employeeServiceImplementation = employeeServiceImplementation;
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<Project>> getAllEmployee() {
+        List<Project> employees = employeeServiceImplementation.findAllEmployee();
+        return new ResponseEntity<>(employees, HttpStatus.OK);
+    }
+
+
+    @GetMapping("/find/{id}")
+    public ResponseEntity<Project> getEmployeeById(@PathVariable("id") Long id) {
+        Project employee = employeeServiceImplementation.findEmployeeById(id);
+        return new ResponseEntity<>(employee, HttpStatus.OK);
+    }
+
+    @PostMapping("/add")
+    public ResponseEntity<Project> addEmployee(@RequestBody Project employee) {
+        Project newEmployee = employeeServiceImplementation.addEmployee(employee);
+        return new ResponseEntity<>(newEmployee, HttpStatus.CREATED);
+    }
+
+
+    @PutMapping("/update")
+    public ResponseEntity<Project> updateEmployee(@RequestBody Project employee) {
+        Project updateEmployee = employeeServiceImplementation.updateEmployee(employee);
+        return new ResponseEntity<>(updateEmployee, HttpStatus.OK);
+    }
+
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteEmployee(@PathVariable("id") Long id) {
+        employeeServiceImplementation.deleteEmployee(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+
+}
